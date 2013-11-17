@@ -1,0 +1,15 @@
+html {
+  height: 0;
+}
+html body {
+  background-color: #666;
+  margin: 0;
+}
+html body #frame {
+  width: 95%;
+  height: 90%;
+  background-color: #ccc;
+  position: absolute;
+  margin-left: 2.5%;
+  margin-top: 2.5%;
+}
