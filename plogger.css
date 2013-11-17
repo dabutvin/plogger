@@ -11,7 +11,8 @@ html body #frame {
   background-color: #ccc;
   position: absolute;
   margin-left: 2.5%;
-  margin-top: 2.5%;
+  margin-bottom: 1%;
+  bottom: 0;
 }
 html body #frame #timer {
   right: 0;
