@@ -13,3 +13,12 @@ html body #frame {
   margin-left: 2.5%;
   margin-top: 2.5%;
 }
+html body #frame #timer {
+  right: 0;
+  bottom: 0;
+  width: 7%;
+  background-color: red;
+  margin: 1%;
+  position: absolute;
+  height: 95%;
+}
