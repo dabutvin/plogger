@@ -14,16 +14,11 @@
         var buildBoard = function(){
             var block = $("<li class='block' />"),
                 blocks = $("#blocks"),
-                numBlocks = calculateBoardSize(),
                 i;
 
-            for(i=1; i<numBlocks; i++){
+            for(i=1; i<settings.numSpots; i++){
                 blocks.prepend(block.attr("data-spot",i).clone());
             }
-        };
-
-        var calculateBoardSize = function(){
-            return 77;
         };
 
         var startTimer = function(){
@@ -72,9 +67,7 @@
         var settings = {
             freeze : false,
             manSpot : 0,
-            windowWidth : $("window").width(),
-            blocksWidthPercent : 0.89,
-            blockWidthPercent : 0.09
+            numSpots : 77,
         };
 
         return{
