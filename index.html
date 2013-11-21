@@ -13,20 +13,16 @@
             <button id="timer-toggle">Start Timer</button>
             <div id="timer"></div>
             <ul id="blocks">
-                <li class="block">
+                <li data-spot="0" class="block">
                     <div id="man"></div>
-                </li>
-                <li class="block">
-                </li>
-                <li class="block">
-                </li>
-                <li class="block">
-                </li>
-                <li class="block">
-                </li>
-                <li class="block">
                 </li>
             </ul>
         </div>
+        <script>
+            $(document).ready(function(){
+                Plogger.BuildBoard();
+                Plogger.BindEvents();
+            });
+        </script>
     </body>
 </html>
