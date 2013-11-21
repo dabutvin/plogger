@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("#timer-toggle").click(function(){
         startTimer();
     });
+
+    $(".block").click(function(){
+        blockClick($(this));
+    })
 });
 
 
@@ -30,4 +34,8 @@ function stopTimer(){
     .text("Start Timer").click(function(){
         startTimer();
     });
+}
+
+function blockClick(jq){
+    $("#man").appendTo(jq);
 }
