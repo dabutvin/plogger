@@ -19,7 +19,11 @@
 
             $(".block").click(function(){
                 blockClick($(this));
-            })
+            });
+
+            $("body").keyup(function(e){
+                keyUp(e.which);
+            });
         };
 
         var dragStart = function(){
@@ -72,6 +76,21 @@
 
             setManSpot(clickedCol);
             moveMan();
+        };
+
+        var keyUp = function(code){
+            if (code === 37 || code === 39) {
+                var currentColumn = getColumn(settings.manSpot);
+
+                    if (code === 37) {
+                        // left
+                        setManSpot(currentColumn + 1);
+                    } else if (code === 39){
+                        // right
+                        setManSpot(currentColumn - 1);
+                    }
+                moveMan();
+            }
         };
 
         var setManSpot = function(clickedCol){
