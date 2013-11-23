@@ -1,5 +1,7 @@
 html {
   height: 0;
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
 }
 html body {
   width: 100%;

@@ -26,19 +26,6 @@
             $("body").swiperight(function(event){
                 manSwipeRight($(event.target));
             });
-
-            disableScroll();
-        };
-
-        var disableScroll = function(){
-             $(document).scroll(function(e){
-                 e.preventDefault();
-                 e.stopPropagation();
-            });
-            $(document).scrollstart(function(e){
-                 e.preventDefault();
-                 e.stopPropagation();
-            });
         };
 
         var buildBoard = function(){
