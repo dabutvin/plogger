@@ -33,6 +33,7 @@ html body #frame #blocks {
   left: 0;
   width: 85%;
   height: 90%;
+  padding-left: .5%;
 }
 html body #frame #blocks .block {
   float: left;
