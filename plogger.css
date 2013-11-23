@@ -2,7 +2,7 @@ html {
   height: 0;
 }
 html body {
-  background-color: #666;
+  position: fixed;
   margin: 0;
 }
 html body #frame {
