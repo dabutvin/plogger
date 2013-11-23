@@ -1,12 +1,14 @@
     Plogger = function($){
 
         var init = function(){
-            buildBoard();
             bindEvents();
-            $(".block[data-spot='5']").addClass("block-built");
         }
 
         var bindEvents = function(){
+            $("#btnStart").click(function(){
+                gameStart();
+            });
+
             $("#timer-toggle").click(function(){
                 startTimer();
             });
@@ -28,6 +30,12 @@
             });
         };
 
+        var gameStart = function(){
+            buildBoard();
+            $("#menu").hide();
+            $("#game").show();
+        };
+
         var buildBoard = function(){
             var block = $("<li class='block' />"),
                 blocks = $("#blocks"),
@@ -36,6 +44,8 @@
             for(i=1; i<settings.numSpots; i++){
                 blocks.prepend(block.attr("data-spot",i).clone());
             }
+
+            $(".block[data-spot='5']").addClass("block-built");
         };
 
         var startTimer = function(){

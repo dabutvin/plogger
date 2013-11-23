@@ -17,7 +17,14 @@ html body #frame {
   margin-bottom: 1%;
   bottom: 0;
 }
-html body #frame #timer {
+html body #frame #menu {
+  width: 30%;
+  margin: auto;
+}
+html body #frame #game {
+  display: none;
+}
+html body #frame #game #timer {
   right: 0;
   bottom: 0;
   width: 7%;
@@ -26,7 +33,7 @@ html body #frame #timer {
   position: absolute;
   height: 95%;
 }
-html body #frame #blocks {
+html body #frame #game #blocks {
   list-style: none;
   position: absolute;
   bottom: 0;
@@ -35,16 +42,16 @@ html body #frame #blocks {
   height: 90%;
   padding-left: 1.5%;
 }
-html body #frame #blocks .block {
+html body #frame #game #blocks .block {
   float: left;
   outline: solid 1px #fff;
   width: 9%;
   height: 10%;
 }
-html body #frame #blocks .block-built {
+html body #frame #game #blocks .block-built {
   background-color: #666;
 }
-html body #frame #man {
+html body #frame #game #man {
   height: 100%;
   width: 100%;
   background: green;
