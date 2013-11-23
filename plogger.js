@@ -4,9 +4,12 @@
             buildBoard();
             bindEvents();
             $(".block[data-spot='5']").addClass("block-built");
-            // $("#man").draggable({
-            //     axis: "x"
-            // });
+            $("#man").draggable({
+                axis: "x",
+                containment: "#blocks",
+                start: dragStart,
+                stop: dragStop
+            });
         }
 
         var bindEvents = function(){
@@ -17,6 +20,14 @@
             $(".block").click(function(){
                 blockClick($(this));
             })
+        };
+
+        var dragStart = function(){
+
+        };
+
+        var dragStop = function(){
+
         };
 
         var buildBoard = function(){
