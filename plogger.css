@@ -37,6 +37,9 @@ html body #frame #blocks .block {
   width: 9%;
   height: 10%;
 }
+html body #frame #blocks .block-built {
+  background-color: #666;
+}
 html body #frame #man {
   height: 100%;
   width: 100%;
