@@ -4,12 +4,6 @@
             buildBoard();
             bindEvents();
             $(".block[data-spot='5']").addClass("block-built");
-            $("#man").draggable({
-                axis: "x",
-                containment: "#blocks",
-                start: dragStart,
-                stop: dragStop
-            });
         }
 
         var bindEvents = function(){
@@ -24,14 +18,14 @@
             $("body").keydown(function(e){
                 keyDown(e.which);
             });
-        };
 
-        var dragStart = function(){
+            $("#man").swipeleft(function(event){
+                manSwipeLeft($(event.target));
+            });
 
-        };
-
-        var dragStop = function(){
-
+            $("#man").swiperight(function(event){
+                manSwipeRight($(event.target));
+            });
         };
 
         var buildBoard = function(){
@@ -93,15 +87,38 @@
             }
         };
 
+        var manSwipeLeft = function (jq){
+            var currentColumn = getColumn(settings.manSpot);
+
+            setManSpot(currentColumn + 1);
+            moveMan();
+        };
+
+        var manSwipeRight = function (jq){
+            var currentColumn = getColumn(settings.manSpot);
+
+            setManSpot(currentColumn - 1);
+            moveMan();
+        };
+
         var setManSpot = function(clickedCol){
             var currentColumn = getColumn(settings.manSpot),
                 nextColumn = currentColumn;
 
             if (currentColumn < clickedCol) {
+                // left
+                if (currentColumn >= settings.spotsPerRow - 1) {
+                    currentColumn = -1;
+                }
                 nextColumn = currentColumn + 1;
             } else if(currentColumn > clickedCol){
+                // right
+                if (currentColumn <= 0) {
+                    currentColumn = settings.spotsPerRow;
+                }
                 nextColumn = currentColumn - 1;
             } else{
+                // current
 
             }
 
