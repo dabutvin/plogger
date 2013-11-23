@@ -71,7 +71,7 @@
         var settings = {
             freeze : false,
             manSpot : 0,
-            numSpots : 77,
+            numSpots : 99,
         };
 
         return{
