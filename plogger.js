@@ -19,11 +19,11 @@
                 keyDown(e.which);
             });
 
-            $("#man").swipeleft(function(event){
+            $("body").swipeleft(function(event){
                 manSwipeLeft($(event.target));
             });
 
-            $("#man").swiperight(function(event){
+            $("body").swiperight(function(event){
                 manSwipeRight($(event.target));
             });
         };
@@ -143,7 +143,7 @@
 
         var getColumn = function(block){
             return block % settings.spotsPerRow;
-        }
+        };
 
         var settings = {
             freeze : false,
