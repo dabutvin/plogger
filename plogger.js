@@ -1,5 +1,9 @@
     Plogger = function($){
 
+        var init = function(){
+            buildBoard();
+            bindEvents();
+        }
 
         var bindEvents = function(){
             $("#timer-toggle").click(function(){
@@ -71,8 +75,7 @@
         };
 
         return{
-            BindEvents: bindEvents,
-            BuildBoard: buildBoard
+            Init:init
         };
 
 }(jQuery);
