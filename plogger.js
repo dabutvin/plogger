@@ -34,6 +34,7 @@
             buildBoard();
             $("#menu").hide();
             $("#game").show();
+            startTimer();
         };
 
         var buildBoard = function(){
