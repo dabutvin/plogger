@@ -21,8 +21,8 @@
                 blockClick($(this));
             });
 
-            $("body").keyup(function(e){
-                keyUp(e.which);
+            $("body").keydown(function(e){
+                keyDown(e.which);
             });
         };
 
@@ -78,7 +78,7 @@
             moveMan();
         };
 
-        var keyUp = function(code){
+        var keyDown = function(code){
             if (code === 37 || code === 39) {
                 var currentColumn = getColumn(settings.manSpot);
 
