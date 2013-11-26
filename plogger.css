@@ -51,8 +51,16 @@ html body #frame #game #blocks .block {
 html body #frame #game #blocks .block-built {
   background-color: #666;
 }
+html body #frame #game #blocks .block-board {
+  background-color: #000;
+}
 html body #frame #game #man {
   height: 100%;
   width: 100%;
   background: green;
+}
+html body #frame #game .dude {
+  height: 100%;
+  width: 100%;
+  background: purple;
 }

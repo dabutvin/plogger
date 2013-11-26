@@ -35,6 +35,7 @@
             $("#menu").hide();
             $("#game").show();
             startTimer();
+            startDudes();
         };
 
         var buildBoard = function(){
@@ -46,7 +47,22 @@
                 blocks.prepend(block.attr("data-spot",i).clone());
             }
 
-            $(".block[data-spot='5']").addClass("block-built");
+            addBlockBoard(5);
+            addBlockBoard(64);
+            addDude(93);
+            addDude(98);
+        };
+
+        var addBlockBoard = function(spot){
+            $(".block[data-spot='"+ spot +"']").addClass("block-board");
+        };
+
+        var addBlockBuilt = function(spot){
+            $(".block[data-spot='"+ spot +"']").addClass("block-built");
+        };
+
+        var addDude = function(spot){
+            $(".block[data-spot='"+ spot +"']").append(settings.dude.clone());
         };
 
         var startTimer = function(){
@@ -54,7 +70,7 @@
 
             timer.animate({
                 "height": "0%"
-            }, 7000, function(){
+            }, settings.timerLength, function(){
                 alert("Time!");
             });
 
@@ -62,6 +78,36 @@
             .text("Stop Timer").click(function(){
                 stopTimer();
             });
+        };
+
+        var startDudes = function(){
+            setInterval(function() {
+                $(".dude").each(function(){
+                    var that = $(this),
+                        currentSpot = that.parent().data("spot"),
+                        nextSpot = lastAvailableBlock(currentSpot - settings.spotsPerRow);
+
+                    if (nextSpot >= 0) {
+                        if (nextSpot === settings.manSpot) {
+                            that.remove();
+                            dudeCollision(nextSpot);
+                        } else{
+                           that.appendTo($(".block[data-spot='"+nextSpot+"']"));
+                        }
+                    } else{
+                         that.remove();
+                    }
+                });
+                seedDudes();
+            }, settings.dudeSpeed);
+        };
+
+        var seedDudes = function(){
+            var totalDudes = $(".dude").length;
+
+            if (totalDudes < settings.maxDudes) {
+                addDude(97);
+            }
         };
 
         var stopTimer = function(){
@@ -112,6 +158,12 @@
             moveMan();
         };
 
+        var dudeCollision = function(spot){
+            addBlockBuilt(spot);
+            settings.manSpot = settings.manSpot + settings.spotsPerRow;
+            moveMan();
+        };
+
         var setManSpot = function(clickedCol){
             var currentColumn = getColumn(settings.manSpot),
                 nextColumn = currentColumn;
@@ -138,8 +190,17 @@
 
         var firstAvailableBlock = function(column){
             var block = $(".block[data-spot='"+ column +"']");
-            if (block.hasClass("block-built")) {
+            if (block.hasClass("block-built") || block.hasClass("block-board")) {
                 return firstAvailableBlock(column + settings.spotsPerRow);
+            } else{
+                return column;
+            }
+        };
+
+        var lastAvailableBlock = function(column){
+            var block = $(".block[data-spot='"+ column +"']");
+            if (block.hasClass("block-built") || block.hasClass("block-board")) {
+                return firstAvailableBlock(column - settings.spotsPerRow);
             } else{
                 return column;
             }
@@ -160,7 +221,11 @@
             freeze : false,
             manSpot : 0,
             numSpots : 99,
-            spotsPerRow : 11
+            spotsPerRow : 11,
+            timerLength: 100000,
+            dudeSpeed: 1000,
+            maxDudes: 2,
+            dude: $("<div class='dude'></div>")
         };
 
         return{
