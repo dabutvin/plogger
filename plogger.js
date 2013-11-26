@@ -71,13 +71,17 @@
             timer.animate({
                 "height": "0%"
             }, settings.timerLength, function(){
-                alert("Time!");
+                timesUp();
             });
 
             $("#timer-toggle").unbind("click")
             .text("Stop Timer").click(function(){
                 stopTimer();
             });
+        };
+
+        var timesUp = function(){
+            settings.freeze = true;
         };
 
         var startDudes = function(){
@@ -103,11 +107,20 @@
         };
 
         var seedDudes = function(){
-            var totalDudes = $(".dude").length;
+            if (!settings.freeze) {
+                var totalDudes = $(".dude").length,
+                    maxSpot = settings.numSpots,
+                    minSpot = settings.numSpots - settings.spotsPerRow - 1;
 
-            if (totalDudes < settings.maxDudes) {
-                addDude(97);
-            }
+
+                if (totalDudes < settings.maxDudes) {
+                    addDude(getRandomInt(minSpot,maxSpot));
+                }
+        }
+        };
+
+        var getRandomInt = function (min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
         };
 
         var stopTimer = function(){
@@ -165,27 +178,29 @@
         };
 
         var setManSpot = function(clickedCol){
-            var currentColumn = getColumn(settings.manSpot),
-                nextColumn = currentColumn;
+            if (!settings.freeze) {
+                var currentColumn = getColumn(settings.manSpot),
+                    nextColumn = currentColumn;
 
-            if (currentColumn < clickedCol) {
-                // left
-                if (currentColumn >= settings.spotsPerRow - 1) {
-                    currentColumn = -1;
+                if (currentColumn < clickedCol) {
+                    // left
+                    if (currentColumn >= settings.spotsPerRow - 1) {
+                        currentColumn = -1;
+                    }
+                    nextColumn = currentColumn + 1;
+                } else if(currentColumn > clickedCol){
+                    // right
+                    if (currentColumn <= 0) {
+                        currentColumn = settings.spotsPerRow;
+                    }
+                    nextColumn = currentColumn - 1;
+                } else{
+                    // current
+
                 }
-                nextColumn = currentColumn + 1;
-            } else if(currentColumn > clickedCol){
-                // right
-                if (currentColumn <= 0) {
-                    currentColumn = settings.spotsPerRow;
-                }
-                nextColumn = currentColumn - 1;
-            } else{
-                // current
 
-            }
-
-            settings.manSpot = firstAvailableBlock(nextColumn);
+                settings.manSpot = firstAvailableBlock(nextColumn);
+        }
         };
 
         var firstAvailableBlock = function(column){
@@ -207,10 +222,12 @@
         };
 
         var moveMan = function(){
-            var man = $("#man"),
-                block = $(".block[data-spot='"+settings.manSpot+"']");
+            if (!settings.freeze) {
+                var man = $("#man"),
+                    block = $(".block[data-spot='"+settings.manSpot+"']");
 
-            block.append(man);
+                block.append(man);
+            }
         };
 
         var getColumn = function(block){
@@ -222,8 +239,8 @@
             manSpot : 0,
             numSpots : 99,
             spotsPerRow : 11,
-            timerLength: 100000,
-            dudeSpeed: 1000,
+            timerLength: 10000,
+            dudeSpeed: 250,
             maxDudes: 2,
             dude: $("<div class='dude'></div>")
         };
