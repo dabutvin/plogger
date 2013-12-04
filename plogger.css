@@ -64,3 +64,9 @@ html body #frame #game .dude {
   width: 100%;
   background: purple;
 }
+html body #frame #game #game-menu {
+  width: 45;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

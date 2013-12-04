@@ -10,7 +10,7 @@
             });
 
             $("#timer-toggle").click(function(){
-                startTimer();
+                toggleFreeze();
             });
 
             $(".block").click(function(){
@@ -53,6 +53,10 @@
             addDude(98);
         };
 
+        var toggleFreeze = function(){
+            settings.freeze = true;
+        };
+
         var addBlockBoard = function(spot){
             $(".block[data-spot='"+ spot +"']").addClass("block-board");
         };
@@ -86,23 +90,25 @@
 
         var startDudes = function(){
             setInterval(function() {
-                $(".dude").each(function(){
-                    var that = $(this),
-                        currentSpot = that.parent().data("spot"),
-                        nextSpot = lastAvailableBlock(currentSpot - settings.spotsPerRow);
+                if (!settings.freeze) {
+                    $(".dude").each(function(){
+                        var that = $(this),
+                            currentSpot = that.parent().data("spot"),
+                            nextSpot = lastAvailableBlock(currentSpot - settings.spotsPerRow);
 
-                    if (nextSpot >= 0) {
-                        if (nextSpot === settings.manSpot) {
-                            that.remove();
-                            dudeCollision(nextSpot);
+                        if (nextSpot >= 0) {
+                            if (nextSpot === settings.manSpot) {
+                                that.remove();
+                                dudeCollision(nextSpot);
+                            } else{
+                               that.appendTo($(".block[data-spot='"+nextSpot+"']"));
+                            }
                         } else{
-                           that.appendTo($(".block[data-spot='"+nextSpot+"']"));
+                             that.remove();
                         }
-                    } else{
-                         that.remove();
-                    }
-                });
-                seedDudes();
+                    });
+                    seedDudes();
+                }
             }, settings.dudeSpeed);
         };
 
@@ -239,7 +245,7 @@
             manSpot : 0,
             numSpots : 99,
             spotsPerRow : 11,
-            timerLength: 10000,
+            timerLength: 1000000,
             dudeSpeed: 250,
             maxDudes: 2,
             dude: $("<div class='dude'></div>")
